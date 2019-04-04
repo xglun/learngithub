@@ -1,0 +1,103 @@
+git 命令：
+初始化：
+    git init
+查看状态
+    git status
+cd
+pwd
+ll
+查看工作区文件：
+cat [文件名]
+
+git add [文件名]
+git commit -m '信息' [文件名]
+
+删除本地库：
+----------------
+
+
+
+
+
+---------------------------------------------------------------
+查看历史信息：
+     git log
+        多屏显示控制的方式：
+	空格向下翻页
+	b向上翻页
+	q退出
+    git log --pretty=oneline
+    git log --oneline
+    git reflog
+
+-----------------------------------------------------------------
+前进后退
+  本质：HEAD指针
+  基于索引操作
+    git reflog
+    git reset --hard [哈希值]
+  使用^符号:只能后退 git reset --hard HEAD^
+  使用~符号:只能后退 git reset --hard HEAD~3
+
+reset 命令的三个参数
+  soft参数：仅在本地库移动HEAD指针
+  mixed参数：在本地库移动HEAD指针，重置暂存区
+  hard参数：在本地库移动HEAD指针，重置暂存区，重置工作区
+
+
+删除文件并找回
+  前提：删除前，文件存在的状态提交到了本地库
+  操作：git reset --hard[指针位置]
+
+比较文件差异
+  git diff[文件名]
+    将工作区的文件和暂存区进行比较
+  git diff[本地库中历史版本][文件名]
+    将工作区中的文件和本地库历史纪录进行比较
+
+
+分支操作：
+  创建分支：git branch[分支名]
+  查看分支：git branch -v
+  切换分支：git checkout[分支名]
+  合并分支：
+       第一步：切换到接受修改的分支（被合并，增加新内容）上
+            git checkout[分支名]
+       第二步：执行merge操作
+            git merge[分支名]
+  解决冲突:
+   第一步：编辑文件，删除特殊符号
+   第二步：把文件修改到满意的程度，保存退出
+   第三步：git add[文件名]
+   第四步：git commit -m'日志信息'
+     注意：此时commit一定不能带具体文件名
+
+推送：
+git push origin master
+强行推送： git push -u origin +master
+
+git remote -v
+git remote add origin https://
+
+克隆：
+  命令：
+    git clone[远程地址]
+  完整的把远程库下载到本地
+  创建origin远程地址别名
+  初始化本地库
+
+拉取：
+  pull = fetch + merge
+  git fetch [远程库地址别名][远程库分支名]
+  git merge [远程库地址别名]/[远程分支名]
+
+git fetch origin master
+git check origin/master
+git checkout master
+git merge origin/master
+
+解决冲突
+  要点：
+    如果不是基于github远程库的最新版所做 的修改，不能推送，必须先拉取
+    拉取下来如果进入冲突状态，则按照‘分支冲突解决’操作解决即可
+
